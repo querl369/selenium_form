@@ -16,6 +16,7 @@ TEST_DATA = {
 
 driver = webdriver.Chrome()
 driver.get("https://www.seleniumeasy.com/test/basic-first-form-demo.html")
+time.sleep(3)
 
 if driver.find_element(By.ID, "at-cv-lightbox-close").size != 0:
     driver.find_element(By.ID, "at-cv-lightbox-close").click()
@@ -24,4 +25,13 @@ driver.find_element(By.CSS_SELECTOR, "input#user-message").send_keys(TEST_DATA['
 driver.find_element(By.CSS_SELECTOR, "form#get-input button").click()
 
 assert driver.find_element(By.ID, "display").text == TEST_DATA['single_input']
+
+driver.find_element(By.CSS_SELECTOR, "#sum1").send_keys(TEST_DATA['two_input_first'])
+driver.find_element(By.CSS_SELECTOR, '#sum2').send_keys(TEST_DATA['two_input_second'])
+driver.find_element(By.CSS_SELECTOR, '[onclick="return total()"]').click()
+driver.find_element(By.CSS_SELECTOR, '#gettotal > button').click()
+
+assert driver.find_element(By.ID, 'displayvalue').text == '777'
+time.sleep(2)
 driver.quit()
+
